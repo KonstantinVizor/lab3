@@ -1,6 +1,0 @@
-LoyaltyGetAllControllerTests 1 0.0589826
-LoyaltyGetByUsernameControllerTests 1 0.0131033
-LoyaltyDeleteByUsernameControllerTests 1 0.0119295
-LoyaltyCreateControllerTests 1 0.0137627
-LoyaltyUpdateByUsernameControllerTests 1 0.0138544
----
