@@ -86,10 +86,10 @@ void ReservationDeleteByUsernameController::handleRequest(Poco::Net::HTTPServerR
 		}
 		catch (...)
 		{
-			resp.setStatus(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE);
-			resp.setReason("Service Unavailable");
-			resp.setContentType("application/json");
-			resp.send() << "{\"message\":\"Loyalty Service unavailable\"}";
+			_qManager->addRequest(req, _loyaltyBreaker);
+			resp.setStatus(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_NO_CONTENT);
+			resp.setReason("No Content");
+			resp.send();
 			return;
 		}
 		if (linfo.getReservationCount() <= 1)
