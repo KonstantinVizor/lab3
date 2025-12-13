@@ -44,3 +44,16 @@ void LoyaltyRepository::updateByUsername(const std::string &username, const Loya
 	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)
 		throw std::runtime_error("Unavailable");
 }
+
+void LoyaltyRepository::decrease(const std::string &username)
+{
+	Poco::Net::HTTPResponse resp;
+	Poco::Net::HTTPRequest req;
+	std::string uri = "/loyalty/decrease";
+	req.setURI(uri);
+	req.set("X-User-Name", username);
+	req.setMethod("PATCH");
+	_breaker->send(req, resp);
+	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)
+		throw std::runtime_error("Unavailable");
+}

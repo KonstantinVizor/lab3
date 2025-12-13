@@ -1,34 +1,31 @@
 #include "../../inc/queue/QueueManager.h"
-#include "Poco/Net/HTTPClientSession.h"
-#include "Poco/Net/HTTPServerResponse.h"
 #include <chrono>
-#include <memory>
 #include <thread>
+#include <iostream>
 
 void QueueManager::_process()
 {
-	std::shared_ptr<CircuitBreaker> breaker;
 	bool sended;
-	Poco::Net::HTTPClientSession client;
-	Poco::Net::HTTPRequest req;
-	Poco::Net::HTTPResponse resp;
+	std::cout << "Работаем\n";
 	while (_running)
 	{
 		_queueMutex.lock();
 		if (_queue.size() > 0)
 		{
+			std::cout << "Здесь что-то есть\n";
 			sended = false;
 			while (!sended)
 			{
-				std::tie(req, breaker) = _queue.front();
-				breaker->send(req, resp);
-				if (resp.getStatus() != Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)
+				try
 				{
+					_queue.front()();
+					std::cout << "ЕЕЕ\n";
 					_queue.pop();
 					sended = true;
 				}
-				else
+				catch (...)
 				{
+					std::cout << "Не получилось\n";
 					_queueMutex.unlock();
 					std::this_thread::sleep_for(std::chrono::seconds(10));
 					_queueMutex.lock();
@@ -39,10 +36,11 @@ void QueueManager::_process()
 	}
 }
 
-void QueueManager::addRequest(const Poco::Net::HTTPRequest &request, const std::shared_ptr<CircuitBreaker> &breaker)
+void QueueManager::addRequest(const std::function<void()> &request)
 {
+	std::cout << "ЕЕЕ, работа)\n";
 	_queueMutex.lock();
-	_queue.push({request, breaker});
+	_queue.push(request);
 	_queueMutex.unlock();
 }
 

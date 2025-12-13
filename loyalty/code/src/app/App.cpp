@@ -16,6 +16,7 @@
 #include "../../inc/controllers/loyalty/GetByUsernameController.h"
 #include "../../inc/controllers/HealthController.h"
 #include "../../inc/controllers/loyalty/UpdateByUsernameController.h"
+#include "../../inc/controllers/loyalty/DecreaseController.h"
 #include "../creator/Creator.hpp"
 
 App::App() : 
@@ -43,6 +44,7 @@ int App::main([[maybe_unused]] const std::vector<std::string> &args)
 	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>());
 	factory->registerHandler("/loyalty", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::GetByUsernameController>(loyaltyRepository));
 	factory->registerHandler("/loyalty", "PATCH", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::UpdateByUsernameController>(loyaltyRepository));
+	factory->registerHandler("/loyalty/decrease", "PATCH", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::DecreaseController>(loyaltyRepository));
 	factory->registerDefaultHandler(creator.getCreateFunction<Poco::Net::HTTPRequestHandler, DefaultController>());
 	Poco::Net::HTTPServer server(factory, _port, new Poco::Net::HTTPServerParams);
 	std::cout << "Loyalty started\n";

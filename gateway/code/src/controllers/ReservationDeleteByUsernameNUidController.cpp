@@ -79,37 +79,13 @@ void ReservationDeleteByUsernameController::handleRequest(Poco::Net::HTTPServerR
 			resp.send();
 			return;
 		}
-		LoyaltyInfo linfo;
 		try
 		{
-			linfo = _loyaltyRepository->getByUsername(username);
+			_loyaltyRepository->decrease(username);
 		}
 		catch (...)
 		{
-			_qManager->addRequest(req, _loyaltyBreaker);
-			resp.setStatus(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_NO_CONTENT);
-			resp.setReason("No Content");
-			resp.send();
-			return;
-		}
-		if (linfo.getReservationCount() <= 1)
-			linfo.setReservationCount(0);
-		else
-			linfo.setReservationCount(linfo.getReservationCount() - 1);
-		if (linfo.getReservationCount() < 10)
-			linfo.setstatus(LoyaltyInfo::Status::BRONZE);
-		else if (linfo.getReservationCount() < 20)
-			linfo.setstatus(LoyaltyInfo::Status::SILVER);
-		try
-		{
-			_loyaltyRepository->updateByUsername(username, LoyaltyModel().setStatus(linfo.getStatus())
-											.setDiscont(linfo.getDiscount())
-											.setUsername(username)
-											.setReservationCount(linfo.getReservationCount()));
-		}
-		catch (...)
-		{
-			_qManager->addRequest(req, _loyaltyBreaker);
+			_qManager->addRequest([this, username](){ this->_loyaltyRepository->decrease(username); });
 		}
 		resp.setStatus(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_NO_CONTENT);
 		resp.setReason("No Content");

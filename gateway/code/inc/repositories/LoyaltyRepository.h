@@ -20,6 +20,7 @@ class LoyaltyRepository
 
 		LoyaltyInfo getByUsername(const std::string &username);
 		void updateByUsername(const std::string &username, const LoyaltyModel &model);
+		void decrease(const std::string &username);
 
 };
 

@@ -1,1 +1,1 @@
-add_library(loyaltyControllers SHARED ./CreateController.cpp ./DeleteByUsernameController.cpp ./GetAllController.cpp ./GetByUsernameController.cpp ./UpdateByUsernameController.cpp)
+add_library(loyaltyControllers SHARED ./CreateController.cpp ./DeleteByUsernameController.cpp ./GetAllController.cpp ./GetByUsernameController.cpp ./UpdateByUsernameController.cpp ./DecreaseController.cpp)
