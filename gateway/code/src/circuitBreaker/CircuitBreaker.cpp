@@ -61,7 +61,11 @@ std::istream* CircuitBreaker::send(Poco::Net::HTTPRequest &req, Poco::Net::HTTPR
 			std::cerr << e.displayText() << "\n";
 			std::cerr << "АААААА, отвалилось\n";
 			_state = StateType::OPEN;
-			_knockKnockThread = std::thread(&CircuitBreaker::_knockKnockMethod, this);
+			if (!_knockKnockThread.joinable())
+			{
+				_knockKnockThread = std::thread(&CircuitBreaker::_knockKnockMethod, this);
+				_knockKnockThread.detach();
+			}
 			resp.setStatus(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE);
 			resp.setReason("Service Unavailable");
 		}
