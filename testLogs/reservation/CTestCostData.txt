@@ -1,0 +1,9 @@
+HotelGetAllControllerTests 1 0.0579835
+HotelGetByUidControllerTests 1 0.0139546
+HotelDeleteByUidControllerTests 1 0.0102035
+HotelCreateControllerTests 1 0.00991578
+HotelUpdateByUidControllerTests 1 0.0117214
+ReservationGetAllControllerTests 1 0.0144744
+ReservationDeleteByUidControllerTests 1 0.0130322
+ReservationUpdateByUidControllerTests 1 0.0121803
+---
