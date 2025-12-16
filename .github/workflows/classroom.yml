@@ -211,4 +211,6 @@ jobs:
         id: autograder
         continue-on-error: true
       - name: Stop containers
-        run: docker compose down
+        if: always()
+        continue-on-error: true
+        run: docker compose down -v
