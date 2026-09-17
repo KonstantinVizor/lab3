@@ -1,4 +1,5 @@
 #include "../../inc/repositories/PaymentRepository.h"
+#include "../../inc/auth/AuthContext.h"
 #include <Poco/Net/HTTPRequest.h>
 #include <Poco/Net/HTTPServerResponse.h>
 #include <Poco/Net/HTTPClientSession.h>
@@ -18,6 +19,7 @@ PaymentInfo PaymentRepository::getByUid(const std::string &uid)
 	PaymentInfo info;
 	std::string json = "", tmp;
 	req.setURI("/payment?payment_uid=" + uid);
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setMethod("GET");
 	std::istream *stream = _breaker->send(req, resp);
 	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)
@@ -35,6 +37,7 @@ void PaymentRepository::updateByUid(const std::string &uid, const PaymentModel &
 	Poco::Net::HTTPResponse resp;
 	Poco::Net::HTTPRequest req;
 	req.setURI("/payment?payment_uid=" + uid);
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setContentType("application/json");
 	req.setContentLength(model.toJson().size());
 	req.setMethod("PATCH");
@@ -53,6 +56,7 @@ std::string PaymentRepository::create(const PaymentModel &model)
 		Poco::Net::HTTPRequest req;
 		req.setURI("/payment");
 		req.setMethod("POST");
+		req.set("Authorization", "Bearer " + AuthContext::token());
 		req.setContentType("application/json");
 		req.setContentLength(model.toJson().size());
 		std::cout << "\t" << __LINE__ << "\n";

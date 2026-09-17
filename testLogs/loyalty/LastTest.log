@@ -1,0 +1,78 @@
+Start testing: Aug 31 20:57 UTC
+----------------------------------------------------------
+1/5 Testing: LoyaltyGetAllControllerTests
+1/5 Test: LoyaltyGetAllControllerTests
+Command: "/app/bin/loyaltyGetAllControllerTests"
+Directory: /app/build/code/tests/loyaltyTests
+"LoyaltyGetAllControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"LoyaltyGetAllControllerTests" end time: Aug 31 20:57 UTC
+"LoyaltyGetAllControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/5 Testing: LoyaltyGetByUsernameControllerTests
+2/5 Test: LoyaltyGetByUsernameControllerTests
+Command: "/app/bin/loyaltyGetByUsernameControllerTests"
+Directory: /app/build/code/tests/loyaltyTests
+"LoyaltyGetByUsernameControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"LoyaltyGetByUsernameControllerTests" end time: Aug 31 20:57 UTC
+"LoyaltyGetByUsernameControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/5 Testing: LoyaltyDeleteByUsernameControllerTests
+3/5 Test: LoyaltyDeleteByUsernameControllerTests
+Command: "/app/bin/loyaltyDeleteByUsernameControllerTests"
+Directory: /app/build/code/tests/loyaltyTests
+"LoyaltyDeleteByUsernameControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"LoyaltyDeleteByUsernameControllerTests" end time: Aug 31 20:57 UTC
+"LoyaltyDeleteByUsernameControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/5 Testing: LoyaltyCreateControllerTests
+4/5 Test: LoyaltyCreateControllerTests
+Command: "/app/bin/loyaltyCreateControllerTests"
+Directory: /app/build/code/tests/loyaltyTests
+"LoyaltyCreateControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"LoyaltyCreateControllerTests" end time: Aug 31 20:57 UTC
+"LoyaltyCreateControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/5 Testing: LoyaltyUpdateByUsernameControllerTests
+5/5 Test: LoyaltyUpdateByUsernameControllerTests
+Command: "/app/bin/loyaltyUpdateByUsernameControllerTests"
+Directory: /app/build/code/tests/loyaltyTests
+"LoyaltyUpdateByUsernameControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"LoyaltyUpdateByUsernameControllerTests" end time: Aug 31 20:57 UTC
+"LoyaltyUpdateByUsernameControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 31 20:57 UTC

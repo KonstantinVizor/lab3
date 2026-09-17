@@ -1,3 +1,4 @@
+#include "../../../inc/auth/AuthContext.h"
 #include "../../../inc/controllers/reservation/CreateController.h"
 #include <Poco/Net/HTTPRequestHandler.h>
 #include <Poco/Net/HTTPServerRequest.h>
@@ -20,7 +21,7 @@ void Reservation::CreateController::handleRequest(Poco::Net::HTTPServerRequest &
 	ReservationModel model;
 	ReservationWithHotel result;
 	HotelResponce hotel;
-	std::string username = req.get("X-User-Name");
+	std::string username = AuthContext::username();
 	std::string uid;
 	std::string body = "", tmp;
 	while (req.stream() >> tmp)

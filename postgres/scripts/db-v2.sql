@@ -62,3 +62,21 @@ CREATE TABLE loyalty
 insert into loyalty values (1, 'Test Max', 25, 'GOLD', 10);
 GRANT ALL PRIVILEGES ON TABLE loyalty TO program;
 GRANT ALL PRIVILEGES ON SEQUENCE loyalty_id_seq TO program;
+
+
+CREATE DATABASE statistics;
+GRANT ALL PRIVILEGES ON DATABASE statistics TO program;
+\connect statistics;
+CREATE TABLE events
+(
+    id              SERIAL PRIMARY KEY,
+    action          VARCHAR(40) NOT NULL,
+    username        VARCHAR(80) NOT NULL,
+    reservation_uid uuid,
+    hotel_uid       uuid,
+    hotel_name      VARCHAR(255),
+    price           INT,
+    occurred_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+GRANT ALL PRIVILEGES ON TABLE events TO program;
+GRANT ALL PRIVILEGES ON SEQUENCE events_id_seq TO program;

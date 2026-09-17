@@ -1,0 +1,123 @@
+Start testing: Aug 31 20:57 UTC
+----------------------------------------------------------
+1/8 Testing: HotelGetAllControllerTests
+1/8 Test: HotelGetAllControllerTests
+Command: "/app/bin/hotelGetAllControllerTests"
+Directory: /app/build/code/tests/hotelTests
+"HotelGetAllControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"HotelGetAllControllerTests" end time: Aug 31 20:57 UTC
+"HotelGetAllControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/8 Testing: HotelGetByUidControllerTests
+2/8 Test: HotelGetByUidControllerTests
+Command: "/app/bin/hotelGetByUidControllerTests"
+Directory: /app/build/code/tests/hotelTests
+"HotelGetByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"HotelGetByUidControllerTests" end time: Aug 31 20:57 UTC
+"HotelGetByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/8 Testing: HotelDeleteByUidControllerTests
+3/8 Test: HotelDeleteByUidControllerTests
+Command: "/app/bin/hotelDeleteByUidControllerTests"
+Directory: /app/build/code/tests/hotelTests
+"HotelDeleteByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"HotelDeleteByUidControllerTests" end time: Aug 31 20:57 UTC
+"HotelDeleteByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/8 Testing: HotelCreateControllerTests
+4/8 Test: HotelCreateControllerTests
+Command: "/app/bin/hotelCreateControllerTests"
+Directory: /app/build/code/tests/hotelTests
+"HotelCreateControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"HotelCreateControllerTests" end time: Aug 31 20:57 UTC
+"HotelCreateControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/8 Testing: HotelUpdateByUidControllerTests
+5/8 Test: HotelUpdateByUidControllerTests
+Command: "/app/bin/hotelUpdateByUidControllerTests"
+Directory: /app/build/code/tests/hotelTests
+"HotelUpdateByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"HotelUpdateByUidControllerTests" end time: Aug 31 20:57 UTC
+"HotelUpdateByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/8 Testing: ReservationGetAllControllerTests
+6/8 Test: ReservationGetAllControllerTests
+Command: "/app/bin/reservationGetAllControllerTests"
+Directory: /app/build/code/tests/reservationTests
+"ReservationGetAllControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"ReservationGetAllControllerTests" end time: Aug 31 20:57 UTC
+"ReservationGetAllControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/8 Testing: ReservationDeleteByUidControllerTests
+7/8 Test: ReservationDeleteByUidControllerTests
+Command: "/app/bin/reservationDeleteByUidControllerTests"
+Directory: /app/build/code/tests/reservationTests
+"ReservationDeleteByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"ReservationDeleteByUidControllerTests" end time: Aug 31 20:57 UTC
+"ReservationDeleteByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/8 Testing: ReservationUpdateByUidControllerTests
+8/8 Test: ReservationUpdateByUidControllerTests
+Command: "/app/bin/reservationUpdateByUidControllerTests"
+Directory: /app/build/code/tests/reservationTests
+"ReservationUpdateByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"ReservationUpdateByUidControllerTests" end time: Aug 31 20:57 UTC
+"ReservationUpdateByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 31 20:57 UTC

@@ -1,0 +1,79 @@
+Start testing: Aug 31 20:57 UTC
+----------------------------------------------------------
+1/5 Testing: PaymentGetAllControllerTests
+1/5 Test: PaymentGetAllControllerTests
+Command: "/app/bin/paymentGetAllControllerTests"
+Directory: /app/build/code/tests/paymentTests
+"PaymentGetAllControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"PaymentGetAllControllerTests" end time: Aug 31 20:57 UTC
+"PaymentGetAllControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/5 Testing: PaymentGetByUidControllerTests
+2/5 Test: PaymentGetByUidControllerTests
+Command: "/app/bin/paymentGetByUidControllerTests"
+Directory: /app/build/code/tests/paymentTests
+"PaymentGetByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"PaymentGetByUidControllerTests" end time: Aug 31 20:57 UTC
+"PaymentGetByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/5 Testing: PaymentDeleteByUidControllerTests
+3/5 Test: PaymentDeleteByUidControllerTests
+Command: "/app/bin/paymentDeleteByUidControllerTests"
+Directory: /app/build/code/tests/paymentTests
+"PaymentDeleteByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"PaymentDeleteByUidControllerTests" end time: Aug 31 20:57 UTC
+"PaymentDeleteByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/5 Testing: PaymentCreateControllerTests
+4/5 Test: PaymentCreateControllerTests
+Command: "/app/bin/paymentCreateControllerTests"
+Directory: /app/build/code/tests/paymentTests
+"PaymentCreateControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+{"id":0,"paymentUid":"f47ac10b-58cc-4372-a567-0e02b2c3d479","price":100,"status":"PAID"}
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"PaymentCreateControllerTests" end time: Aug 31 20:57 UTC
+"PaymentCreateControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/5 Testing: PaymentUpdateByUidControllerTests
+5/5 Test: PaymentUpdateByUidControllerTests
+Command: "/app/bin/paymentUpdateByUidControllerTests"
+Directory: /app/build/code/tests/paymentTests
+"PaymentUpdateByUidControllerTests" start time: Aug 31 20:57 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"PaymentUpdateByUidControllerTests" end time: Aug 31 20:57 UTC
+"PaymentUpdateByUidControllerTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 31 20:57 UTC

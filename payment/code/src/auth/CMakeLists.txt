@@ -1,0 +1,5 @@
+add_library(auth SHARED ./AuthContext.cpp ./JwksClient.cpp ./JwtAuth.cpp)
+target_link_libraries(auth ${CMAKE_SOURCE_DIR}/libs/libPocoNet.so)
+target_link_libraries(auth ${CMAKE_SOURCE_DIR}/libs/libPocoJSON.so)
+target_link_libraries(auth ${CMAKE_SOURCE_DIR}/libs/libPocoFoundation.so)
+target_link_libraries(auth OpenSSL::Crypto)

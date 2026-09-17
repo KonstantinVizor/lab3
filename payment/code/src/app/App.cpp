@@ -39,7 +39,7 @@ int App::main([[maybe_unused]] const std::vector<std::string> &args)
 	Creator creator;
 	ControllerFactory *factory = new ControllerFactory;
 //	factory->registerHandler("/payment/all", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Payment::GetAllController>(paymentRepository));
-	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>());
+	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>(), false);
 	factory->registerHandler("/payment", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Payment::GetByUidController>(paymentRepository));
 	factory->registerHandler("/payment", "PATCH", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Payment::UpdateByUidController>(paymentRepository));
 	factory->registerHandler("/payment", "POST", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Payment::CreateController>(paymentRepository));

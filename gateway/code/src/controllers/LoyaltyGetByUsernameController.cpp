@@ -1,3 +1,4 @@
+#include "../../inc/auth/AuthContext.h"
 #include "../../inc/controllers/LoyaltyGetByUsernameController.h"
 #include <Poco/Net/HTTPRequestHandler.h>
 #include <Poco/Net/HTTPServerRequest.h>
@@ -11,7 +12,7 @@ LoyaltyGetByUsernameController::LoyaltyGetByUsernameController(const std::shared
 
 void LoyaltyGetByUsernameController::handleRequest(Poco::Net::HTTPServerRequest &req, Poco::Net::HTTPServerResponse &resp)
 {
-	std::string username = req.get("X-User-Name");
+	std::string username = AuthContext::username();
 	LoyaltyInfo result;
 	try
 	{

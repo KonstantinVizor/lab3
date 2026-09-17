@@ -1,0 +1,6 @@
+PaymentGetAllControllerTests 1 0.00738063
+PaymentGetByUidControllerTests 1 0.00796433
+PaymentDeleteByUidControllerTests 1 0.00603208
+PaymentCreateControllerTests 1 0.0048447
+PaymentUpdateByUidControllerTests 1 0.00493634
+---

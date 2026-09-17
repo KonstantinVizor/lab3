@@ -1,1 +1,3 @@
 add_library(controllers SHARED ./DefaultController.cpp ./HotelGetAllController.cpp ./LoyaltyGetByUsernameController.cpp ./MeGetByUsernameController.cpp ./ReservationCreateByUsernameController.cpp ./ReservationDeleteByUsernameNUidController.cpp ./ReservationGetByUsernameController.cpp ./ReservationGetByUsernameNUidController.cpp ./HealthController.cpp)
+target_link_libraries(controllers auth)
+target_link_libraries(controllers kafka)

@@ -1,3 +1,4 @@
+#include "../../inc/auth/AuthContext.h"
 #include "../../inc/controllers/ReservationGetByUsernameNUidController.h"
 #include "Poco/Net/HTTPRequestHandler.h"
 #include <Poco/Net/HTTPServerResponse.h>
@@ -16,7 +17,7 @@ ReservationGetByUsernameNUidController::ReservationGetByUsernameNUidController(c
 void ReservationGetByUsernameNUidController::handleRequest(Poco::Net::HTTPServerRequest &req, Poco::Net::HTTPServerResponse &resp)
 {
 	Uri uri(req.getURI());
-	std::string username = req.get("X-User-Name");
+	std::string username = AuthContext::username();
 	std::string uid = uri.getPathFragment(uri.getPathSize() - 1);
 	std::vector<ReservationWithHotel> reservations;
 	try

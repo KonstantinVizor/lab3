@@ -41,7 +41,7 @@ int App::main([[maybe_unused]] const std::vector<std::string> &args)
 //	factory->registerHandler("/loyalty/all", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::GetAllController>(loyaltyRepository));
 //	factory->registerHandler("/loyalty", "POST", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::CreateController>(loyaltyRepository));
 //	factory->registerHandler("/loyalty", "DELETE", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::DeleteByUsernameController>(loyaltyRepository));
-	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>());
+	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>(), false);
 	factory->registerHandler("/loyalty", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::GetByUsernameController>(loyaltyRepository));
 	factory->registerHandler("/loyalty", "PATCH", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::UpdateByUsernameController>(loyaltyRepository));
 	factory->registerHandler("/loyalty/decrease", "PATCH", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Loyalty::DecreaseController>(loyaltyRepository));

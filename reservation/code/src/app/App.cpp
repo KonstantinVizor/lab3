@@ -44,9 +44,9 @@ int App::main([[maybe_unused]] const std::vector<std::string> &args)
 	hotelRepository->setSession(session);
 	Creator creator;
 	ControllerFactory *factory = new ControllerFactory;
-	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>());
-	factory->registerHandler("/hotel/all", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Hotel::GetAllController>(hotelRepository));
-	factory->registerHandler("/hotel", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Hotel::GetByUidController>(hotelRepository));
+	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>(), false);
+	factory->registerHandler("/hotel/all", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Hotel::GetAllController>(hotelRepository), false);
+	factory->registerHandler("/hotel", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Hotel::GetByUidController>(hotelRepository), false);
 //	factory->registerHandler("/reservation/{s}", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Reservation::GetByUidController>(reservationRepository,
 //																			hotelRepository));
 	factory->registerHandler("/reservation", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, Reservation::GetByUsernameController>(reservationRepository,

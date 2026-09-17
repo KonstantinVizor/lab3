@@ -1,3 +1,4 @@
+#include "../../../inc/auth/AuthContext.h"
 #include "../../../inc/controllers/loyalty/DecreaseController.h"
 #include <Poco/Net/HTTPRequestHandler.h>
 #include <Poco/Net/HTTPServerRequest.h>
@@ -15,7 +16,7 @@ void Loyalty::DecreaseController::handleRequest(Poco::Net::HTTPServerRequest &re
 {
 	Uri uri(req.getURI());
 	std::optional<LoyaltyModel> model;
-	std::string username = req.get("X-User-Name");
+	std::string username = AuthContext::username();
 	if (username == "")
 	{
 		resp.setStatus(Poco::Net::HTTPResponse::HTTPStatus::HTTP_NO_CONTENT);

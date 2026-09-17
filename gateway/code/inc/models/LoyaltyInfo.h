@@ -24,9 +24,9 @@ class LoyaltyInfo
 			"GOLD"
 		};
 
-		uint32_t _reservationCount;
+		uint32_t _reservationCount = 0;
 		std::string _status;
-		uint32_t _discont;
+		uint32_t _discont = 0;
 
 	public:
 		LoyaltyInfo() = default;

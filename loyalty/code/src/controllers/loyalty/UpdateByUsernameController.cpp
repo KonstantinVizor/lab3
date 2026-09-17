@@ -1,3 +1,4 @@
+#include "../../../inc/auth/AuthContext.h"
 #include "../../../inc/controllers/loyalty/UpdateByUsernameController.h"
 #include <Poco/Net/HTTPRequestHandler.h>
 #include <Poco/Net/HTTPServerRequest.h>
@@ -17,7 +18,7 @@ void Loyalty::UpdateByUsernameController::handleRequest(Poco::Net::HTTPServerReq
 	bool correctJson;
 	Uri uri(req.getURI());
 	std::optional<LoyaltyModel> model;
-	std::string username = req.get("X-User-Name");//uri.getValue("username");
+	std::string username = AuthContext::username();//uri.getValue("username");
 	std::string body = "", tmp;
 	while (req.stream() >> tmp)
 	{

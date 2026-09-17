@@ -50,8 +50,8 @@ int App::main([[maybe_unused]] const std::vector<std::string> &args)
 	std::shared_ptr<HotelRepository> hotelRepository = std::make_shared<HotelRepository>(hotelBreaker);
 	Creator creator;
 	ControllerFactory *factory = new ControllerFactory;
-	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>());
-	factory->registerHandler("/api/v1/hotels", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HotelGetAllController>(hotelRepository));
+	factory->registerHandler("/manage/health", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HealthController>(), false);
+	factory->registerHandler("/api/v1/hotels", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, HotelGetAllController>(hotelRepository), false);
 	factory->registerHandler("/api/v1/me", "GET", creator.getCreateFunction<Poco::Net::HTTPRequestHandler, MeGetByUsernameController>(hotelRepository,
 																	loyaltyRepository,
 																	paymentRepository)); // *

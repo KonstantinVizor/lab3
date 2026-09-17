@@ -1,10 +1,12 @@
-#include "../inc/controllers/ReservationCreateByUsernameController.h"		
+#include "../../inc/auth/AuthContext.h"
+#include "../../inc/kafka/KafkaProducer.h"
+#include "../../inc/controllers/ReservationCreateByUsernameController.h"
 #include <Poco/Net/HTTPRequestHandler.h>
 #include <Poco/Net/HTTPServerResponse.h>
 #include <Poco/Net/HTTPServerRequest.h>
-#include "../inc/models/CreateReservationRequest.h"
-#include "../inc/models/CreateReservationResponse.h"
-#include "../inc/rollbackPayment/RollBackPayment.h"
+#include "../../inc/models/CreateReservationRequest.h"
+#include "../../inc/models/CreateReservationResponse.h"
+#include "../../inc/rollbackPayment/RollBackPayment.h"
 #include <Poco/Net/NetException.h>
 
 ReservationCreateByUsernameController::ReservationCreateByUsernameController(const std::shared_ptr<HotelRepository> &hotelRepository,
@@ -22,7 +24,7 @@ void ReservationCreateByUsernameController::handleRequest(Poco::Net::HTTPServerR
 {
 	std::string json = "";
 	std::string tmp;
-	std::string username = req.get("X-User-Name");
+	std::string username = AuthContext::username();
 	std::string uid;
 	CreateReservationRequest createReq;
 	ReservationWithHotel resresp;
@@ -133,6 +135,12 @@ void ReservationCreateByUsernameController::handleRequest(Poco::Net::HTTPServerR
 				.setHotelUid(createReq.getHotelUid())
 				.setStartDate(resresp.getStartDate())
 				.setReservationUid(resresp.getReservationUid());
+		KafkaProducer::publish("booking-events",
+			"{\"action\":\"RESERVATION_CREATED\",\"username\":\"" + username +
+			"\",\"reservationUid\":\"" + resresp.getReservationUid() +
+			"\",\"hotelUid\":\"" + createReq.getHotelUid() +
+			"\",\"hotelName\":\"" + hresp.getName() +
+			"\",\"price\":" + std::to_string(sum) + "}");
 		resp.setStatus(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 		resp.setReason("OK");
 		resp.setContentType("application/json");

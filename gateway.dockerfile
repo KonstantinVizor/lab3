@@ -1,6 +1,6 @@
 FROM archlinux:latest as base
 RUN pacman -Sy
-RUN pacman --noconfirm -S cmake make gcc openssl postgresql-libs
+RUN pacman --noconfirm -S cmake make gcc openssl postgresql-libs librdkafka
 
 FROM base AS build
 WORKDIR /app

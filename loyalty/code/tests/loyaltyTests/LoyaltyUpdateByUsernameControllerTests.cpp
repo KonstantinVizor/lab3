@@ -1,4 +1,5 @@
 #include <cassert>
+#include "../../inc/auth/AuthContext.h"
 #include "../../inc/controllers/loyalty/UpdateByUsernameController.h"
 #include "../util/MockResponse.h"
 #include "../util/MockRequest.h"
@@ -24,7 +25,7 @@ int main(void)
 	static_cast<MockLoyaltyRepository *>(rep.get())->setTestData(testData);
 	MockRequest req(updateJson);
 	req.setURI("/loyalty");
-	req.set("X-User-Name", "Kostya");
+	AuthContext::set("Kostya", "User", "test-token");
 
 	controller.handleRequest(req, resp);
 	

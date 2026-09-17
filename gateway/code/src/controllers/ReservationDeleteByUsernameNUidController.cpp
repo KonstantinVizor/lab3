@@ -1,8 +1,10 @@
-#include "../inc/controllers/ReservationDeleteByUsernameNUidController.h"
+#include "../../inc/auth/AuthContext.h"
+#include "../../inc/kafka/KafkaProducer.h"
+#include "../../inc/controllers/ReservationDeleteByUsernameNUidController.h"
 #include <Poco/Net/HTTPRequestHandler.h>
 #include <Poco/Net/HTTPServerResponse.h>
 #include <Poco/Net/HTTPServerRequest.h>
-#include "../inc/models/ReservationWithHotel.h"
+#include "../../inc/models/ReservationWithHotel.h"
 #include "../../inc/uri/Uri.h"
 
 ReservationDeleteByUsernameController::ReservationDeleteByUsernameController(const std::shared_ptr<HotelRepository> &hotelRepository,
@@ -21,7 +23,7 @@ ReservationDeleteByUsernameController::ReservationDeleteByUsernameController(con
 void ReservationDeleteByUsernameController::handleRequest(Poco::Net::HTTPServerRequest &req, Poco::Net::HTTPServerResponse &resp)
 {
 	Uri uri(req.getURI());
-	std::string username = req.get("X-User-Name");
+	std::string username = AuthContext::username();
 	std::string uid = uri.getPathFragment(uri.getPathSize() - 1);
 	std::vector<ReservationWithHotel> reservations;
 	try
@@ -79,14 +81,25 @@ void ReservationDeleteByUsernameController::handleRequest(Poco::Net::HTTPServerR
 			resp.send();
 			return;
 		}
+		std::string token = AuthContext::token();
+		std::string role = AuthContext::role();
 		try
 		{
 			_loyaltyRepository->decrease(username);
 		}
 		catch (...)
 		{
-			_qManager->addRequest([this, username](){ this->_loyaltyRepository->decrease(username); });
+			_qManager->addRequest([this, username, token, role](){
+				AuthContext::set(username, role, token);
+				this->_loyaltyRepository->decrease(username);
+			});
 		}
+		KafkaProducer::publish("booking-events",
+			"{\"action\":\"RESERVATION_CANCELED\",\"username\":\"" + username +
+			"\",\"reservationUid\":\"" + reservation.getReservationUid() +
+			"\",\"hotelUid\":\"" + reservation.getHotel().getHotelUid() +
+			"\",\"hotelName\":\"" + reservation.getHotel().getName() +
+			"\",\"price\":" + std::to_string(pinfo.getPrice()) + "}");
 		resp.setStatus(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_NO_CONTENT);
 		resp.setReason("No Content");
 		resp.send();

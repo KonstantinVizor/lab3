@@ -13,7 +13,8 @@ class ControllerFactory : public Poco::Net::HTTPRequestHandlerFactory
 		using HandlerCreator = std::function<HandlerPtr()>;
 		using HandlerCreatorMap = std::vector<std::tuple<std::string,
 		      						std::string,
-								HandlerCreator>>;
+								HandlerCreator,
+								bool>>;
 		using RegexMap = std::unordered_map<std::string, std::regex>;
 
 	private:
@@ -26,9 +27,9 @@ class ControllerFactory : public Poco::Net::HTTPRequestHandlerFactory
 		ControllerFactory(ControllerFactory &&) = delete;
 		~ControllerFactory() = default;
 		ControllerFactory();
-	
+
 		ControllerFactory& registerHandler(const std::string &path, const std::string &method,
-							const HandlerCreator &creator);
+							const HandlerCreator &creator, bool requireAuth = true);
 		ControllerFactory& registerDefaultHandler(const HandlerCreator &creator);
 
 		virtual HandlerPtr createRequestHandler(const Poco::Net::HTTPServerRequest &req) override;

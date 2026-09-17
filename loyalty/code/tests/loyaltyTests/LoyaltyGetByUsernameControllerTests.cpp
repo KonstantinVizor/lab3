@@ -1,4 +1,5 @@
 #include <cassert>
+#include "../../inc/auth/AuthContext.h"
 #include "../../inc/controllers/loyalty/GetByUsernameController.h"
 #include "../util/MockResponse.h"
 #include "../util/MockRequest.h"
@@ -20,18 +21,18 @@ int main(void)
 	bool flag;
 	Loyalty::GetByUsernameController controller(rep);
 	req.setURI("/loyalty");
-	req.add("X-User-Name", "Kostya");
+	AuthContext::set("Kostya", "User", "test-token");
 
 	controller.handleRequest(req, resp);
-	
+
 	LoyaltyModel tmp;
 	std::string json = resp.getStream().str();
 	flag = tmp.fromJson(json);
 	assert(flag);
 	assert(tmp == testData);
 
-	
-	req.set("X-User-Name", "Miha");
+
+	AuthContext::set("Miha", "User", "test-token");
 
 	controller.handleRequest(req, resp);
 	

@@ -1,3 +1,4 @@
+#include "../../inc/auth/AuthContext.h"
 #include "../../inc/repositories/HotelRepository.h"
 #include <Poco/Net/HTTPRequest.h>
 #include <Poco/Net/HTTPResponse.h>
@@ -61,7 +62,7 @@ std::vector<ReservationWithHotel> HotelRepository::getReservationsByUsername(con
 	std::vector<ReservationWithHotel> result;
 	std::string json = "", tmp;
 	req.setURI("/reservation");
-	req.set("X-User-Name", username);
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setMethod("GET");
 	std::istream *stream = _breaker->send(req, resp);
 	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)
@@ -86,7 +87,7 @@ ReservationWithHotel HotelRepository::createReservation(const std::string &usern
 	std::string json = "", tmp;
 	req.setURI("/reservation");
 	req.setMethod("POST");
-	req.set("X-User-Name", username);
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setContentType("application/json");
 	req.setContentLength(request.toJson().size());
 	std::istream *stream = _breaker->send(req, resp, request.toJson());
@@ -104,6 +105,7 @@ void HotelRepository::updateReservation(const std::string &uid, const Reservatio
 	Poco::Net::HTTPRequest req;
 	req.setURI("/reservation?reservation_uid=" + uid);
 	req.setMethod("PATCH");
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setContentType("application/json");
 	req.setContentLength(res.toJson().size());
 	_breaker->send(req, resp, res.toJson());
@@ -117,6 +119,7 @@ void HotelRepository::deleteReservation(const std::string &uid)
 	Poco::Net::HTTPRequest req;
 	req.setURI("/reservation?reservation_uid=" + uid);
 	req.setMethod("DELETE");
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setContentType("application/json");
 	_breaker->send(req, resp);
 	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)

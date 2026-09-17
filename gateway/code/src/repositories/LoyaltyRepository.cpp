@@ -1,3 +1,4 @@
+#include "../../inc/auth/AuthContext.h"
 #include "../../inc/repositories/LoyaltyRepository.h"
 #include <Poco/Net/HTTPRequest.h>
 #include <Poco/Net/HTTPServerResponse.h>
@@ -16,14 +17,22 @@ LoyaltyInfo LoyaltyRepository::getByUsername(const std::string &username)
 	LoyaltyInfo info;
 	std::string json = "", tmp;
 	req.setURI("/loyalty");
-	req.set("X-User-Name", username);
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setMethod("GET");
 	std::istream *stream = _breaker->send(req, resp);
 	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)
 		throw std::runtime_error("Unavailable");
 	while (*stream >> tmp)
 		json += tmp;
-	model.fromJson(json, true);
+	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_NOT_FOUND ||
+		!model.fromJson(json, true))
+	{
+		LoyaltyInfo fallback;
+		fallback.setstatus(LoyaltyInfo::Status::BRONZE)
+			.setReservationCount(0)
+			.setDiscount(5);
+		return fallback;
+	}
 	info = LoyaltyInfo(model);
 	return info;
 }
@@ -36,7 +45,7 @@ void LoyaltyRepository::updateByUsername(const std::string &username, const Loya
 	Poco::Net::HTTPRequest req;
 	std::string uri = "/loyalty";
 	req.setURI(uri);
-	req.set("X-User-Name", username);
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setMethod("PATCH");
 	req.setContentType("application/json");
 	req.setContentLength(model.toJson().size());
@@ -51,7 +60,7 @@ void LoyaltyRepository::decrease(const std::string &username)
 	Poco::Net::HTTPRequest req;
 	std::string uri = "/loyalty/decrease";
 	req.setURI(uri);
-	req.set("X-User-Name", username);
+	req.set("Authorization", "Bearer " + AuthContext::token());
 	req.setMethod("PATCH");
 	_breaker->send(req, resp);
 	if (resp.getStatus() == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_SERVICE_UNAVAILABLE)
