@@ -9,7 +9,8 @@ void QueueManager::_process()
 	std::cout << "Работаем\n";
 	while (_running)
 	{
-		_queueMutex.lock();
+		std::unique_lock<std::mutex> lock(_queueMutex);
+		_queueCv.wait(lock, [this] { return !_queue.empty() || !_running; });
 		if (_queue.size() > 0)
 		{
 			std::cout << "Здесь что-то есть\n";
@@ -26,22 +27,23 @@ void QueueManager::_process()
 				catch (...)
 				{
 					std::cout << "Не получилось\n";
-					_queueMutex.unlock();
+					lock.unlock();
 					std::this_thread::sleep_for(std::chrono::seconds(10));
-					_queueMutex.lock();
+					lock.lock();
 				}
 			}
 		}
-		_queueMutex.unlock();
 	}
 }
 
 void QueueManager::addRequest(const std::function<void()> &request)
 {
 	std::cout << "ЕЕЕ, работа)\n";
-	_queueMutex.lock();
-	_queue.push(request);
-	_queueMutex.unlock();
+	{
+		std::lock_guard<std::mutex> lock(_queueMutex);
+		_queue.push(request);
+	}
+	_queueCv.notify_one();
 }
 
 void QueueManager::start()
@@ -54,4 +56,5 @@ void QueueManager::start()
 void QueueManager::stop()
 {
 	_running = false;
+	_queueCv.notify_all();
 }

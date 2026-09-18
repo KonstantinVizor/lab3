@@ -5,6 +5,7 @@
 #include <queue>
 #include <thread>
 #include <mutex>
+#include <condition_variable>
 #include <Poco/Net/HTTPRequest.h>
 
 class QueueManager
@@ -12,6 +13,7 @@ class QueueManager
 	private:
 		std::queue<std::function<void()>> _queue;
 		std::mutex _queueMutex;
+		std::condition_variable _queueCv;
 		std::thread mainThread;
 		bool _running;
 
